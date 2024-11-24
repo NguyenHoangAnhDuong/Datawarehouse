@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/DBMart
+    url: jdbc:postgresql://localhost:5456/DBMart
     driverClassName: org.postgresql.Driver
     username: user
     password: password
