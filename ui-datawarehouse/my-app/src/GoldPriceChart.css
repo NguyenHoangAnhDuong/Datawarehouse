@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.gold-price-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdd835;
+    padding: 10px 20px;
+}
+
+.header .logo span {
+    font-weight: bold;
+    color: #a50000;
+    font-size: 1.5em;
+}
+
+.nav span {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.chart-section {
+    padding: 20px;
+}
+
+.chart-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.chart-header p {
+    margin: 5px 0 20px 0;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.chart {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.chart-image-placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #ccc;
+    color: #999;
+}
+
+
+.chart-controls button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #0288d1;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.chart-controls button:hover {
+    background-color: #039be5;
+    transform: scale(1.05);
+}
+
+.chart-controls button.active {
+    background-color: #005b9f;
+}
+.footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
