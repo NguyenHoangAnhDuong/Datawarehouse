@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:14-alpine3.20'
+    environment:
+      - 'POSTGRES_DB=DBMart'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=user'
+    ports:
+      - '5456:5432'
