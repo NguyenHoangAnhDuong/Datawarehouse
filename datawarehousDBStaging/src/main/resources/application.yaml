@@ -5,10 +5,17 @@ server:
 
 spring:
   datasource:
+    controller:
+      url: jdbc:postgresql://localhost:5454/DBController
+      driverClassName: org.postgresql.Driver
+      username: user
+      password: password
+    staging:
     url: jdbc:postgresql://localhost:5455/DBStaging
     driverClassName: org.postgresql.Driver
     username: user
     password: password
+
   jpa:
     hibernate:
       ddl-auto: update
