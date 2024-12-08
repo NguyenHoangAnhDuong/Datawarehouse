@@ -1,4 +1,4 @@
-package com.example.scrapeDatafromWeb;
+package com.example.scrapeDatafromWeb.service;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -6,6 +6,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,14 +19,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+@Component
+@Service
 public class ScrapeDataPNJ {
 
-    public static void main(String[] args) {
-        // Chỉ cần chạy main, hàm này sẽ tự động thực hiện các bước cần thiết
-        scrapeGoldPrices();
-    }
+//    public static void main(String[] args) {
+//        // Chỉ cần chạy main, hàm này sẽ tự động thực hiện các bước cần thiết
+//        scrapeGoldPrices();
+//    }
 
-    public static void scrapeGoldPrices() {
+    public void scrapeGoldPrices() {
         // URL cần cào dữ liệu
         String url = "https://bieudogiavang.vn/gia-vang-pnj";
 
