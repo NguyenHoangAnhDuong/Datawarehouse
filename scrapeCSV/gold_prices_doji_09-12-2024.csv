@@ -1,0 +1,46 @@
+Id,TypeName,Company,BuyValue,SellValue
+1,SJC HN - Bán Lẻ,trong nước,8,270,000,8,520,000
+2,AVPL HN - Bán Lẻ,trong nước,8,270,000,8,520,000
+3,SJC HCM - Bán Lẻ,trong nước,8,270,000,8,520,000
+4,AVPL HCM - Bán Lẻ,trong nước,8,270,000,8,520,000
+5,SJC ĐN - Bán Lẻ,trong nước,8,270,000,8,520,000
+6,AVPL ĐN - Bán Lẻ,trong nước,8,270,000,8,520,000
+7,KNT + KTT + Kim Giáp - Bán Lẻ,trong nước,8,270,000,8,520,000
+8,Nhẫn Tròn 9999 (Hưng Thịnh Vượng) - Bán Lẻ,trong nước,8,350,000,8,450,000
+9,,trong nước,N/A,N/A
+10,SJC- Bán Lẻ,Hà Nội,8,270,000,8,520,000
+11,AVPL - Bán Lẻ,Hà Nội,8,270,000,8,520,000
+12,Nhẫn Tròn 9999 (Hưng Thịnh Vượng) - Bán Lẻ,Hà Nội,8,350,000,8,450,000
+13,KTT + Kim Giáp - Bán Lẻ,Hà Nội,8,270,000,8,520,000
+14,Nữ Trang 9999 - Bán Lẻ,Hà Nội,8,320,000,8,440,000
+15,Nữ Trang 999 - Bán Lẻ,Hà Nội,8,310,000,8,430,000
+16,Nữ trang 99 - Bán Lẻ,Hà Nội,8,240,000,8,395,000
+17,Giá Nguyên Liệu 18k - Bán Lẻ,Hà Nội,6,106,000,-,000
+18,Giá Nguyên Liệu 16K - Bán Lẻ,Hà Nội,5,342,000,-,000
+19,Giá Nguyên Liệu 15K - Bán Lẻ,Hà Nội,4,860,000,-,000
+20,Giá Nguyên Liệu 14K - Bán Lẻ,Hà Nội,4,659,000,-,000
+21,Giá Nguyên Liệu 10K - Bán Lẻ,Hà Nội,3,415,000,-,000
+22,,Hà Nội,N/A,N/A
+23,SJC- Bán Lẻ,Hồ Chí Minh,8,270,000,8,520,000
+24,AVPL - Bán Lẻ,Hồ Chí Minh,8,270,000,8,520,000
+25,KNT+ KTT + Kim Giáp - Bán Lẻ,Hồ Chí Minh,8,270,000,8,520,000
+26,Nhẫn Tròn 9999 (Hưng Thịnh Vượng) - Bán Lẻ,Hồ Chí Minh,8,350,000,8,450,000
+27,Nữ Trang 9999 - Bán Lẻ,Hồ Chí Minh,8,320,000,8,440,000
+28,Nữ Trang 999 - Bán Lẻ,Hồ Chí Minh,8,310,000,8,430,000
+29,Nữ Trang 99 - Bán Lẻ,Hồ Chí Minh,8,240,000,8,395,000
+30,Giá Nguyên Liệu 18k - Bán Lẻ,Hồ Chí Minh,6,106,000,-,000
+31,Giá Nguyên Liệu 16K - Bán Lẻ,Hồ Chí Minh,5,342,000,-,000
+32,Giá Nguyên Liệu 15K - Bán Lẻ,Hồ Chí Minh,4,860,000,-,000
+33,Giá Nguyên Liệu 14K - Bán Lẻ,Hồ Chí Minh,4,659,000,-,000
+34,Giá Nguyên Liệu 10K - Bán Lẻ,Hồ Chí Minh,3,415,000,-,000
+35,,Hồ Chí Minh,N/A,N/A
+36,SJC- Bán Lẻ,Đà Nẵng,8,270,000,8,520,000
+37,AVPL - Bán Lẻ,Đà Nẵng,8,270,000,8,520,000
+38,KNT + KTT + Kim Giáp - Bán Lẻ,Đà Nẵng,8,270,000,8,520,000
+39,Nhẫn Tròn 9999 (Hưng Thịnh Vượng) - Bán Lẻ,Đà Nẵng,8,350,000,8,450,000
+40,Nữ Trang 9999 - Bán Lẻ,Đà Nẵng,8,320,000,8,440,000
+41,Giá Nguyên Liệu 18K - Bán Lẻ,Đà Nẵng,6,106,000,-,000
+42,Giá Nguyên Liệu 16K - Bán Lẻ,Đà Nẵng,5,342,000,-,000
+43,Giá Nguyên Liệu 15K - Bán lẻ,Đà Nẵng,4,860,000,-,000
+44,Giá Nguyên Liệu 10K - Bán Lẻ,Đà Nẵng,3,415,000,-,000
+45,,Đà Nẵng,N/A,N/A
