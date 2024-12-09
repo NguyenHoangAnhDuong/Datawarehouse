@@ -35,10 +35,17 @@ public class ScrapeDataPNJ {
     @Autowired
     private FileConfigRepository fileConfigRepository;
 
-    private FileConfigEntity formatName(){
+    private String formatName(){
         FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_pnj_", "scrape", "active");
-
-        return entity;
+        String path = "";
+        if(entity == null){
+           String csvDirectory = "../scrapeCSV/";
+           path = csvDirectory + "gold_prices_pnj_";
+       }
+        else {
+            path = entity.getPath();
+        }
+        return path;
     }
 
     public void scrapeGoldPrices() {
@@ -46,7 +53,8 @@ public class ScrapeDataPNJ {
         String url = "https://bieudogiavang.vn/gia-vang-pnj";
 
         // Thư mục lưu file CSV và XLSX
-//        String csvDirectory = "../scrapeCSV/";
+        String csvFilePath = "";
+        String csvDirectory = "../scrapeCSV/";
         String xlsxDirectory = "../changeCSVtoXLSX/";
 
         try {
@@ -55,8 +63,8 @@ public class ScrapeDataPNJ {
 
             // Lấy ngày hiện tại để đặt tên file
             String dateNow = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-//            String csvFilePath = csvDirectory + "gold_prices_pnj_" + dateNow + ".csv";
-            String csvFilePath = formatName().getPath() + dateNow +  ".csv";
+
+            csvFilePath = formatName() + dateNow +  ".csv";
 
             String xlsxFilePath = xlsxDirectory + "gold_prices_pnj_" + dateNow + ".xlsx";
 
@@ -91,8 +99,11 @@ public class ScrapeDataPNJ {
             System.out.println("CSV: " + csvFilePath);
             FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "success");
             fileLogService.saveFileLogs(request);
+
         } catch (IOException e) {
             e.printStackTrace();
+            FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "error");
+            fileLogService.saveFileLogs(request);
         }
     }
 

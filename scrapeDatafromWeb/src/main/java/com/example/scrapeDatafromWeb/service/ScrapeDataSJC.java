@@ -33,15 +33,23 @@ public class ScrapeDataSJC {
     @Autowired
     private FileConfigRepository fileConfigRepository;
 
-    private FileConfigEntity formatName(){
-        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_sjc_", "scrape", "active");
-
-        return entity;
+    private String formatName(){
+        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_pnj_", "scrape", "active");
+        String path = "";
+        if(entity == null){
+            String csvDirectory = "../scrapeCSV/";
+            path = csvDirectory + "gold_prices_sjc_";
+        }
+        else {
+            path = entity.getPath();
+        }
+        return path;
     }
 
     public  void scrapeData() {
         String apiUrl = "https://sjc.com.vn/GoldPrice/Services/PriceService.ashx";
-//        String csvDirectory = "../scrapeCSV/";
+        String csvFilePath = "";
+        String csvDirectory = "../scrapeCSV/";
         String xlsxDirectory = "../changeCSVtoXLSX/";
 
         try {
@@ -52,8 +60,8 @@ public class ScrapeDataSJC {
 
             // Xử lý lưu trữ
             String dateNow = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-//            String csvFilePath = csvDirectory + "gold_prices_sjc_" + dateNow + ".csv";
-            String csvFilePath = formatName().getPath() + dateNow + ".csv";
+
+            csvFilePath = formatName() + dateNow + ".csv";
             String xlsxFilePath = xlsxDirectory + "gold_prices_sjc_" + dateNow + ".xlsx";
 
             saveToCSV(data, csvFilePath);
@@ -65,6 +73,8 @@ public class ScrapeDataSJC {
             fileLogService.saveFileLogs(request);
         } catch (Exception e) {
             e.printStackTrace();
+            FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "error");
+            fileLogService.saveFileLogs(request);
         }
     }
 

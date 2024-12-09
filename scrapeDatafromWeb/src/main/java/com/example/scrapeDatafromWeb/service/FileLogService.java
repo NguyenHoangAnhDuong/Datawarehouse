@@ -8,7 +8,9 @@ import com.example.scrapeDatafromWeb.request.FileLogRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class FileLogService {
@@ -33,6 +35,21 @@ public class FileLogService {
         }catch (Exception e){
             response.setStatus("ERROR");
             response.setMessage("Failed to save File Logs: " + e.getMessage());
+        }
+
+        return response;
+    }
+
+    public ApiResponse<List<FileLogsEntity>> getFileLogNow(LocalDate date){
+        ApiResponse<List<FileLogsEntity>> response = new ApiResponse<>();
+        try{
+            List<FileLogsEntity> fileLogsEntities = fileLogRepository.findByCreatedAt(date);
+            response.setStatus("SUCCESS");
+            response.setMessage("File Logs fetched successfully");
+            response.setData(fileLogsEntities);
+        }catch (Exception e){
+            response.setStatus("ERROR");
+            response.setMessage("Failed to fetch File Logs: " + e.getMessage());
         }
 
         return response;
