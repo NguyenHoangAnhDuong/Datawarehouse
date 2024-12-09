@@ -1,59 +1,57 @@
-
 package com.example.datawarehousDBStaging.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ForeignKey;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "file_config")
-@Getter
-@Setter
+@Table(name = "file_configs")
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class FileConfig {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "id_config", foreignKey = @ForeignKey(name = "file_config_configs_fk"))
-  private Config config;
-
-  @Column(name = "name_file")
-  private String nameFile;
+  @Column(name = "name")
+  private String name;
 
   @Column(name = "file_timestamp")
-  private String fileTimestamp;
+  private LocalDateTime fileTimestamp;
 
-  @Column(name = "file_path")
-  private String filePath;
-
-  @Column(name = "file_collumn_list")
-  private String fileColumnList;
+  @Column(name = "path")
+  private String path;
 
   @Column(name = "created_at")
-  private String createdAt;
+  private LocalDateTime createdAt;
+
+  @Column(name = "file_column_list")
+  private String fileColumnList;
 
   @Column(name = "created_by")
   private String createdBy;
 
   @Column(name = "deleted")
-  private Integer deleted;
+  private boolean deleted;
 
   @Column(name = "status")
   private String status;
 
-  @Column(name = "staging_table")
-  private String stagingTable;
+  @Column(name = "event")
+  private String event;
+
+  @ManyToOne
+  @JoinColumn(name = "config_id")
+  @JsonIgnore
+  private Config configEntity;
+
+
+
 }

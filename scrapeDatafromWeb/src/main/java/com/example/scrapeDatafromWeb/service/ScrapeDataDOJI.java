@@ -35,15 +35,23 @@ public class ScrapeDataDOJI {
     @Autowired
     private FileConfigRepository fileConfigRepository;
 
-    private FileConfigEntity formatName(){
-        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_doji_", "scrape", "active");
-
-        return entity;
+    private String formatName(){
+        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_pnj_", "scrape", "active");
+        String path = "";
+        if(entity == null){
+            String csvDirectory = "../scrapeCSV/";
+            path = csvDirectory + "gold_prices_doji_";
+        }
+        else {
+            path = entity.getPath();
+        }
+        return path;
     }
 
     public void scrapeGoldPrices() {
         String url = "https://doji.vn/bang-gia-vang/";
-//        String csvDirectory = "../scrapeCSV/";
+        String csvFilePath = "";
+        String csvDirectory = "../scrapeCSV/";
         String xlsxDirectory = "../changeCSVtoXLSX/";
 
         try {
@@ -53,8 +61,8 @@ public class ScrapeDataDOJI {
 
             // Prepare date and file names
             String dateNow = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-//            String csvFilePath = csvDirectory + "gold_prices_doji_" + dateNow + ".csv";
-            String csvFilePath = formatName().getPath() + dateNow + ".csv";
+
+            csvFilePath = formatName() + dateNow + ".csv";
             String xlsxFilePath = xlsxDirectory + "gold_prices_doji_" + dateNow + ".xlsx";
 
             // Extract data
@@ -93,6 +101,8 @@ public class ScrapeDataDOJI {
 
         } catch (IOException e) {
             e.printStackTrace();
+            FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "error");
+            fileLogService.saveFileLogs(request);
         }
     }
 

@@ -1,59 +1,85 @@
 package com.example.datawarehousDBStaging.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
-import lombok.Getter;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import java.util.List;
 
 @Entity
-@Table(name = "configs")
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "configs")
 public class Config {
-  private Integer id;
-  @Column(name = "staging_src_username")
-  private String stgSrcUsername;
-  @Column(name = "staging_src_pwd")
-  private String stgSrcPwd;
-  @Column(name = "staging_src_port")
-  private Integer stgSrcPort;
-  @Column(name = "staging_db_name")
-  private String stgDbName;
-  @Column(name = "staging_src_host")
-  private String stgSrcHost;
 
-  @Column(name = "wh_src_username")
-  private String whSrcUsername;
-  @Column(name = "wh_src_pwd")
-  private String whSrcPwd;
-  @Column(name = "wh_src_port")
-  private Integer whSrcPort;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(name = "staging_db_name")
+  private String stagingDbName;
+
+  @Column(name = "staging_source_host")
+  private String stagingSourceHost;
+
+  @Column(name = "staging_source_port")
+  private int stagingSourcePort;
+
+  @Column(name = "staging_source_username")
+  private String stagingSourceUsername;
+
+  @Column(name = "staging_source_password")
+  private String stagingSourcePassword;
+
   @Column(name = "wh_db_name")
   private String whDbName;
-  @Column(name = "wh_src_host")
-  private String whSrcHost;
 
-  @Column(name = "mart_src_username")
-  private String martSrcUsername;
-  @Column(name = "mart_src_pwd")
-  private String martSrcPwd;
-  @Column(name = "mart_src_port")
-  private Integer marthSrcPort;
+  @Column(name = "wh_source_host")
+  private String whSourceHost;
+
+  @Column(name = "wh_source_port")
+  private int whSourcePort;
+
+  @Column(name = "wh_source_username")
+  private String whSourceUsername;
+
+  @Column(name = "wh_source_password")
+  private String whSourcePassword;
+
   @Column(name = "mart_db_name")
   private String martDbName;
-  @Column(name = "mart_src_host")
-  private String martSrcHost;
+
+  @Column(name = "mart_source_host")
+  private String martSourceHost;
+
+  @Column(name = "mart_source_port")
+  private int martSourcePort;
+
+  @Column(name = "mart_source_username")
+  private String martSourceUsername;
+
+  @Column(name = "mart_source_password")
+  private String martSourcePassword;
 
   @Column(name = "download_path")
   private String downloadPath;
-  @Column(name = "error_to_mail")
-  private String errorToMail;
 
+  @Column(name = "error_to_email")
+  private String errorToEmail;
+
+  @Column(name = "flag")
   private String flag;
+
+  @Column(name = "status")
   private String status;
+
+  @OneToMany
+  @JoinColumn(name = "config_id")
+  private List<FileConfig> fileConfigEntities;
 
 }
