@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.text.Annotation;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class FileConfigService {
                         .fileColumnList(fileConfigRequest.getFileColumnList())
                         .fileTimestamp(LocalDateTime.now())
                         .name(fileConfigRequest.getName())
-                        .path(filePath + File.separator + fileConfigRequest.getName())
+                        .path(filePath + fileConfigRequest.getName())
                         .status("active")
                         .build();
 
@@ -93,4 +94,6 @@ public class FileConfigService {
 
         return response;
     }
+
+
 }

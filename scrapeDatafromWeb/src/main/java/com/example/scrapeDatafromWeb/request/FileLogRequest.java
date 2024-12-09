@@ -16,6 +16,5 @@ public class FileLogRequest {
     private String name;
     private String eventType;
     private String status;
-    private LocalDateTime createdAt;
 
 }

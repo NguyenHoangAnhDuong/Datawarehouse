@@ -11,4 +11,6 @@ import java.util.List;
 public interface FileConfigRepository extends JpaRepository<FileConfigEntity, Long> {
 
     List<FileConfigEntity> findAllByStatusAndEvent(String status, String event);
+
+    FileConfigEntity findByNameAndEventAndStatus(String name, String event, String status);
 }

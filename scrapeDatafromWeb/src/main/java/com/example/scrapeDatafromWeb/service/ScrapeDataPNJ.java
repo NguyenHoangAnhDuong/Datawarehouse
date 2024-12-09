@@ -1,11 +1,15 @@
 package com.example.scrapeDatafromWeb.service;
 
+import com.example.scrapeDatafromWeb.entity.FileConfigEntity;
+import com.example.scrapeDatafromWeb.repository.FileConfigRepository;
+import com.example.scrapeDatafromWeb.request.FileLogRequest;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +28,25 @@ import java.util.List;
 @Service
 public class ScrapeDataPNJ {
 
-//    public static void main(String[] args) {
-//        // Chỉ cần chạy main, hàm này sẽ tự động thực hiện các bước cần thiết
-//        scrapeGoldPrices();
-//    }
+
+    @Autowired
+    private FileLogService fileLogService;
+
+    @Autowired
+    private FileConfigRepository fileConfigRepository;
+
+    private FileConfigEntity formatName(){
+        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_pnj_", "scrape", "active");
+
+        return entity;
+    }
 
     public void scrapeGoldPrices() {
         // URL cần cào dữ liệu
         String url = "https://bieudogiavang.vn/gia-vang-pnj";
 
         // Thư mục lưu file CSV và XLSX
-        String csvDirectory = "../scrapeCSV/";
+//        String csvDirectory = "../scrapeCSV/";
         String xlsxDirectory = "../changeCSVtoXLSX/";
 
         try {
@@ -43,7 +55,9 @@ public class ScrapeDataPNJ {
 
             // Lấy ngày hiện tại để đặt tên file
             String dateNow = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            String csvFilePath = csvDirectory + "gold_prices_pnj_" + dateNow + ".csv";
+//            String csvFilePath = csvDirectory + "gold_prices_pnj_" + dateNow + ".csv";
+            String csvFilePath = formatName().getPath() + dateNow +  ".csv";
+
             String xlsxFilePath = xlsxDirectory + "gold_prices_pnj_" + dateNow + ".xlsx";
 
             // Cào dữ liệu từ bảng trên trang web
@@ -74,7 +88,9 @@ public class ScrapeDataPNJ {
             writeXlsxFile(records, xlsxFilePath);
 
             System.out.println("Dữ liệu đã được lưu thành công!");
-
+            System.out.println("CSV: " + csvFilePath);
+            FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "success");
+            fileLogService.saveFileLogs(request);
         } catch (IOException e) {
             e.printStackTrace();
         }
