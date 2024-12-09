@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public interface FileConfigRepository extends JpaRepository<FileConfig, Long> {
 
-
     // Lấy danh sách các fileconfig cần kiểm tra.
-    List<FileConfig> findByIdConfigAndStatus(Long idConfig, String status);
+    List<FileConfig> findByConfigEntityIdAndStatus(Long idConfig, String status);
 }

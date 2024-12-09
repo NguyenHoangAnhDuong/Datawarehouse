@@ -7,6 +7,8 @@ services:
       - "POSTGRES_USER=user"
     ports:
       - "5454:5432"
+    networks:
+      - shared_network
 
   staging:
     image: "postgres:14-alpine3.20"
@@ -16,5 +18,11 @@ services:
       - "POSTGRES_USER=user"
     ports:
       - "5455:5432"
+    networks:
+      - shared_network
     depends_on:
       - controller
+
+networks:
+  shared_network: 
+    external: true

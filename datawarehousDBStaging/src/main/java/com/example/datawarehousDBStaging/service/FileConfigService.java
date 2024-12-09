@@ -23,7 +23,7 @@ public class FileConfigService {
 
         ApiResponse<Config> configApiResponse = configService.getActiveConfig();
 
-        List<FileConfig> entity = fileConfigRepository.findByIdConfigAndStatus(configApiResponse.getData().getId(),"active");
+        List<FileConfig> entity = fileConfigRepository.findByConfigEntityIdAndStatus(configApiResponse.getData().getId(),"active");
 
         return entity;
     }

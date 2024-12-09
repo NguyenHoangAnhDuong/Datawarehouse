@@ -7,3 +7,14 @@ services:
       - 'POSTGRES_USER=user'
     ports:
       - '5454:5432'
+    volumes:
+      - controller_data:/var/lib/postgresql/data
+    networks:
+      - shared_network
+
+networks:
+  shared_network:
+    external: true
+
+volumes:
+  controller_data:
