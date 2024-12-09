@@ -1,5 +1,6 @@
 package com.example.scrapeDatafromWeb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +49,7 @@ public class FileConfigEntity {
 
     @ManyToOne
     @JoinColumn(name = "config_id")
+    @JsonIgnore
     private ConfigEntity configEntity;
 
 
