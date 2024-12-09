@@ -1,0 +1,2 @@
+INSERT INTO public.configs (staging_src_username,staging_src_pwd,staging_src_port,staging_db_name,staging_src_host,wh_src_username,wh_src_pwd,wh_src_port,wh_db_name,wh_src_host,mart_src_username,mart_src_pwd,mart_src_port,mart_db_name,mart_src_host,download_path,error_to_mail,flag,status) VALUES
+	 ('user','password',5455,'DBStaging','localhost','user','password',5457,'DBwarehouse','localhost','user','password',5456,'DBMart','localhost','E:\Nong_Lam_University\HK7\Data_Warehouse\semester-warehouse\Datawarehouse','21130408@st.hcmuaf.edu.vn','not started','active');
