@@ -69,6 +69,7 @@ public class ScrapeDataSJC {
                 };
                 writer.writeNext(row);
             }
+
         }
     }
 
