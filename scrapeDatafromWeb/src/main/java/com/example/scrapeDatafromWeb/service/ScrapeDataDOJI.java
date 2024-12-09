@@ -1,5 +1,8 @@
 package com.example.scrapeDatafromWeb.service;
 
+import com.example.scrapeDatafromWeb.entity.FileConfigEntity;
+import com.example.scrapeDatafromWeb.repository.FileConfigRepository;
+import com.example.scrapeDatafromWeb.request.FileLogRequest;
 import com.example.scrapeDatafromWeb.utils.SSLUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -7,6 +10,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +29,21 @@ import java.util.List;
 @Service
 public class ScrapeDataDOJI {
 
-//    public static void main(String[] args) {
-//        scrapeGoldPrices();
-//    }
+    @Autowired
+    private FileLogService fileLogService;
+
+    @Autowired
+    private FileConfigRepository fileConfigRepository;
+
+    private FileConfigEntity formatName(){
+        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_doji_", "scrape", "active");
+
+        return entity;
+    }
 
     public void scrapeGoldPrices() {
         String url = "https://doji.vn/bang-gia-vang/";
-        String csvDirectory = "../scrapeCSV/";
+//        String csvDirectory = "../scrapeCSV/";
         String xlsxDirectory = "../changeCSVtoXLSX/";
 
         try {
@@ -41,7 +53,8 @@ public class ScrapeDataDOJI {
 
             // Prepare date and file names
             String dateNow = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            String csvFilePath = csvDirectory + "gold_prices_doji_" + dateNow + ".csv";
+//            String csvFilePath = csvDirectory + "gold_prices_doji_" + dateNow + ".csv";
+            String csvFilePath = formatName().getPath() + dateNow + ".csv";
             String xlsxFilePath = xlsxDirectory + "gold_prices_doji_" + dateNow + ".xlsx";
 
             // Extract data
@@ -73,7 +86,10 @@ public class ScrapeDataDOJI {
             // Convert to XLSX
             writeXlsxFile(records, xlsxFilePath);
 
-            System.out.println("Data saved successfully!");
+            System.out.println("Dữ liệu đã được lưu thành công!");
+            System.out.println("CSV: " + csvFilePath);
+            FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "success");
+            fileLogService.saveFileLogs(request);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,8 @@
 package com.example.scrapeDatafromWeb.service;
 
+import com.example.scrapeDatafromWeb.entity.FileConfigEntity;
+import com.example.scrapeDatafromWeb.repository.FileConfigRepository;
+import com.example.scrapeDatafromWeb.request.FileLogRequest;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -14,6 +17,7 @@ import java.util.Date;
 import com.opencsv.CSVWriter;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +27,21 @@ import java.io.IOException;
 @Component
 @Service
 public class ScrapeDataSJC {
+    @Autowired
+    private FileLogService fileLogService;
+
+    @Autowired
+    private FileConfigRepository fileConfigRepository;
+
+    private FileConfigEntity formatName(){
+        FileConfigEntity entity = fileConfigRepository.findByNameAndEventAndStatus("gold_prices_sjc_", "scrape", "active");
+
+        return entity;
+    }
 
     public  void scrapeData() {
         String apiUrl = "https://sjc.com.vn/GoldPrice/Services/PriceService.ashx";
-        String csvDirectory = "../scrapeCSV/";
+//        String csvDirectory = "../scrapeCSV/";
         String xlsxDirectory = "../changeCSVtoXLSX/";
 
         try {
@@ -37,13 +52,17 @@ public class ScrapeDataSJC {
 
             // Xử lý lưu trữ
             String dateNow = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-            String csvFilePath = csvDirectory + "gold_prices_sjc_" + dateNow + ".csv";
+//            String csvFilePath = csvDirectory + "gold_prices_sjc_" + dateNow + ".csv";
+            String csvFilePath = formatName().getPath() + dateNow + ".csv";
             String xlsxFilePath = xlsxDirectory + "gold_prices_sjc_" + dateNow + ".xlsx";
 
             saveToCSV(data, csvFilePath);
             saveToExcel(data, xlsxFilePath);
 
             System.out.println("Dữ liệu đã được lưu thành công!");
+            System.out.println("CSV: " + csvFilePath);
+            FileLogRequest request = new FileLogRequest(csvFilePath, "scraper", "success");
+            fileLogService.saveFileLogs(request);
         } catch (Exception e) {
             e.printStackTrace();
         }
