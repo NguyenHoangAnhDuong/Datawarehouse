@@ -6,6 +6,8 @@ import com.example.datawarehousDBStaging.entity.Config;
 
 
 @Repository
-public interface ConfigRepository extends JpaRepository<Config, Integer> {
+public interface ConfigRepository extends JpaRepository<Config, Long> {
 
+    // Kiểm tra status trên table config.
+    Config findByStatus(String status);
 }

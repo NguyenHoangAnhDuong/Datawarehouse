@@ -1,25 +1,27 @@
-
 package com.example.datawarehousDBStaging.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "file_log")
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name = "file_logs")
 public class FileLog {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
-  @Column(name = "name_file")
-  private String nameFile;
+  @Column(name = "name")
+  private String name;
 
   @Column(name = "event_type")
   private String eventType;
@@ -27,6 +29,9 @@ public class FileLog {
   @Column(name = "status")
   private String status;
 
-  @Column(name = "create_on")
-  private String createOn;
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
+
+
+
 }

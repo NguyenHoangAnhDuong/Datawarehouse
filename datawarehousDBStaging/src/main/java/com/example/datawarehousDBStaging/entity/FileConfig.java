@@ -1,49 +1,57 @@
-
 package com.example.datawarehousDBStaging.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "file_config")
-@Getter
-@Setter
+@Table(name = "file_configs")
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class FileConfig {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
-  @Column(name = "id_config")
-  private Integer config;
-
-  @Column(name = "name_file")
-  private String nameFile;
+  @Column(name = "name")
+  private String name;
 
   @Column(name = "file_timestamp")
-  private String fileTimestamp;
+  private LocalDateTime fileTimestamp;
 
-  @Column(name = "file_path")
-  private String filePath;
-
-  @Column(name = "file_collumn_list")
-  private String fileColumnList;
+  @Column(name = "path")
+  private String path;
 
   @Column(name = "created_at")
-  private String createdAt;
+  private LocalDateTime createdAt;
+
+  @Column(name = "file_column_list")
+  private String fileColumnList;
 
   @Column(name = "created_by")
   private String createdBy;
 
   @Column(name = "deleted")
-  private Integer deleted;
+  private boolean deleted;
 
   @Column(name = "status")
   private String status;
 
-  @Column(name = "staging_table")
-  private String stagingTable;
+  @Column(name = "event")
+  private String event;
+
+  @ManyToOne
+  @JoinColumn(name = "config_id")
+  @JsonIgnore
+  private Config configEntity;
+
+
+
 }
