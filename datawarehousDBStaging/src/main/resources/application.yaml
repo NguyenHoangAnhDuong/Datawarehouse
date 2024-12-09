@@ -4,10 +4,18 @@ server:
     context-path: /DBStaging
 
 spring:
-  datasource:
-    controller:
-      url: jdbc:postgresql://controller:5432/DBController
-      driverClassName: org.postgresql.Driver
+#  datasource:
+#    controller:
+#      url: jdbc:postgresql://localhost:5432/DBController
+#      driverClassName: org.postgresql.Driver
+#      username: user
+#      password: password
+  controller:
+    url: jdbc:postgresql://dbcontroller:5432/DBController
+    username: user
+    password: password
+    staging:
+      url: jdbc:postgresql://staging:5432/DBStaging
       username: user
       password: password
   jpa:

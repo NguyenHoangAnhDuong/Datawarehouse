@@ -1,15 +1,32 @@
+#services:
+#  controller:
+#    image: "postgres:14-alpine3.20"
+#    environment:
+#      - "POSTGRES_DB=DBController"
+#      - "POSTGRES_PASSWORD=password"
+#      - "POSTGRES_USER=user"
+#    ports:
+#      - "5454:5432"
+#    networks:
+#      - shared_network
+#
+#  staging:
+#    image: "postgres:14-alpine3.20"
+#    environment:
+#      - "POSTGRES_DB=DBStaging"
+#      - "POSTGRES_PASSWORD=password"
+#      - "POSTGRES_USER=user"
+#    ports:
+#      - "5455:5432"
+#    networks:
+#      - shared_network
+#    depends_on:
+#      - controller
+#
+#networks:
+#  shared_network:
+#    external: true
 services:
-  controller:
-    image: "postgres:14-alpine3.20"
-    environment:
-      - "POSTGRES_DB=DBController"
-      - "POSTGRES_PASSWORD=password"
-      - "POSTGRES_USER=user"
-    ports:
-      - "5454:5432"
-    networks:
-      - shared_network
-
   staging:
     image: "postgres:14-alpine3.20"
     environment:
@@ -17,12 +34,12 @@ services:
       - "POSTGRES_PASSWORD=password"
       - "POSTGRES_USER=user"
     ports:
-      - "5455:5432"
+      - "5455:5432"  # Expose for optional external access
     networks:
       - shared_network
-    depends_on:
-      - controller
+#    depends_on:
+#      - dbcontroller  # Ensure DBController service is ready
 
 networks:
-  shared_network: 
-    external: true
+  shared_network:
+    external: true  # Use the external shared Docker network

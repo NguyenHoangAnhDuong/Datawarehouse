@@ -1,7 +1,6 @@
 package com.example.datawarehousDBStaging.service;
 
-import com.example.datawarehousDBStaging.entity.Config;
-import com.example.datawarehousDBStaging.entity.FileConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,12 +33,20 @@ public class CheckLoadData {
     private JdbcTemplate stagingJdbcTemplate;
 
     public void loadDataToStaging() {
-        boolean checkLoadData = fileLogService.isFileLoadedSuccessfully();
 
-        if (checkLoadData) {
-            emailService.sendEmail(configService.getActiveConfig().getData().getErrorToEmail());
+        // Lấy lên các file đã load (trạng thái là failed)
+        List<String> failedFiles = fileLogService.checkFileLoadStatus();
+
+        // Tất cả các file đều đã load thaành công,  gửi mail báo về hệ thống và kết thúc chương trình.
+        if (failedFiles == null) {
+            emailService.sendEmail(configService.getActiveConfig().getData().getErrorToEmail()
+                    );
         } else {
-            emailService.sendErrorEmail(configService.getActiveConfig().getData().getErrorToEmail(), "False.");
+            // Lấy danh sách các file chưa tải thành công.
+            String failedFilesMessage = String.join("\n", failedFiles);
+
+            //Thực hieện
+
         }
     }
 
